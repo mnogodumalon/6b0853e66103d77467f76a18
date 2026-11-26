@@ -1,0 +1,15 @@
+{
+  "WorkshopsDialog.tsx": {
+    "titel": "z. B. Excel Grundlagen",
+    "datum": "Wann findet er statt?",
+    "ort": "z. B. Raum 2, Berlin",
+    "max_teilnehmer": "z. B. 20"
+  },
+  "AnmeldungenDialog.tsx": {
+    "workshop": "Welcher Workshop?",
+    "vorname": "z. B. Anna",
+    "nachname": "z. B. Müller",
+    "email": "z. B. anna@beispiel.de",
+    "frage": "Was möchten Sie wissen?"
+  }
+}

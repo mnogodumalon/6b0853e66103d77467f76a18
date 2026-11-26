@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "language": "de",
+  "understanding": {
+    "summary": "Du legst Workshops mit Titel, Datum, Ort und maximaler Teilnehmerzahl an. Zu jedem Workshop gibt es einen eigenen QR-Code, den du mit einem Klick bildschirmfüllend in einem eigenen Browsertab öffnest, mit Titel und Datum darüber. Interessierte scannen den Code und melden sich ohne Login für genau diesen Workshop an: Vorname, Nachname, E-Mail-Adresse und eine optionale Frage an die Referentin. In der Übersicht siehst du je Workshop die Zahl der Anmeldungen und die freien Plätze.",
+    "outside_users": [
+      {
+        "who": "Interessierte vor Ort",
+        "does": "scannen den QR-Code und melden sich für genau diesen Workshop an"
+      }
+    ],
+    "roles": [
+      "Veranstalterin (legt Workshops an, behält die Anmeldungen im Blick)"
+    ],
+    "main_tasks": [
+      "Workshops anlegen",
+      "QR-Code eines Workshops bildschirmfüllend anzeigen",
+      "Anmeldungen und freie Plätze je Workshop beobachten"
+    ],
+    "platform_roles": [
+      {
+        "persona": "Veranstalterin",
+        "role": "datenverarbeitung",
+        "apps": [
+          "workshops",
+          "anmeldungen"
+        ]
+      }
+    ],
+    "wish_kind": "plain",
+    "wish_signals": []
+  },
+  "flows": [],
+  "public_pages": [
+    {
+      "slug": "workshop-anmelden",
+      "purpose": "Interessierte scannen den QR-Code und melden sich ohne Login für genau diesen Workshop an: Vorname, Nachname, E-Mail-Adresse und eine optionale Frage an die Referentin. Die Seite zeigt Titel, Datum und Ort des Workshops.",
+      "publish": true,
+      "lists": [
+        {
+          "entity": "workshops",
+          "columns": [
+            "titel",
+            "datum",
+            "ort"
+          ],
+          "filter": null,
+          "max_records": null
+        }
+      ],
+      "creates": [
+        {
+          "entity": "anmeldungen",
+          "fields": {
+            "workshop": "picked",
+            "vorname": "user",
+            "nachname": "user",
+            "email": "user",
+            "frage": "user"
+          },
+          "fixed": {}
+        }
+      ],
+      "visitor_fields": [],
+      "page_sets": [],
+      "record_key": {},
+      "editable": {},
+      "edit_own": false,
+      "link_param": {
+        "name": "workshop",
+        "entity": "workshops",
+        "label_field": "titel"
+      },
+      "door_per_record": {
+        "entity": "workshops",
+        "param": "tor",
+        "link_param": "workshop",
+        "refs": {
+          "anmeldungen": "workshop"
+        }
+      },
+      "vote": null,
+      "brief": "# Public page `workshop-anmelden`\nInteressierte scannen den QR-Code und melden sich ohne Login für genau diesen Workshop an: Vorname, Nachname, E-Mail-Adresse und eine optionale Frage an die Referentin. Die Seite zeigt Titel, Datum und Ort des Workshops.\n\n## Lists (declare exactly these in the surface)\n- `workshops`: columns `titel`, `datum`, `ort`\n\n## Creates (declare exactly these in the surface)\n- `anmeldungen`: visitor fields `workshop`, `vorname`, `nachname`, `email`, `frage`\n\n## A pair of doors per linked record (door_per_record, EF-51)\n- Every `workshops` record has its OWN read door and write door; the link the owner hands out is `#/public/workshop-anmelden?workshop=<id>&tor=<read>.<write>`, and the client swaps the doors in by itself (`loadPublicPagesConfig('workshop-anmelden')` reads the address). Declare `\"door_per_record\": true` next to `link_param` in the surface. Nothing else changes in how you read and write.\n- The read door answers ONLY this record's children (`anmeldungen`) and the linked `workshops` record itself — a client-side narrowing by the reference is harmless but not needed.\n- The write door PRESETS the reference to the `workshops` on every create: never put that field into a form, `values` or `link` (the platform answers 400 for a client that sends it); the layer drops it from the payload.\n- A link whose doors are gone (closed and renewed, deleted) answers 404: say „Dieser Link ist nicht mehr gültig. Bitte den aktuellen Link oder QR-Code verwenden.“ — never the empty state. When the `workshops` is closed, the write door is off: the page shows the result view (your status check) and sends nothing.\n- The doors' ids live in the link alone (`tor=`): never a field, never text on the page.\n\n## Link parameter (declare exactly this in the surface)\n- `link_param: { name: 'workshop', entity: 'workshops', label_field: 'titel' }` — the page opens as `#/public/workshop-anmelden?workshop=<id>` and reads THAT `workshops` record from its list endpoint; without the parameter it shows a short notice (never a list to pick from — the owner hands out one link per record).\n\n## Availability — mechanical, write nothing for it\nA picker (`useRecordSearch`) never offers a record another record already takes (a booked slot) — the layer leaves it out. To SHOW booked periods, call `useOccupancy(port, '<entity>')` and hand `blocked` to AvailabilityRangePicker; the integration gives the page exactly that read (dates or the reference, never who booked). Never declare a list of bookings with names or contacts to work availability out yourself.\n\nPublish: never from here — every page starts as a draft; the owner publishes it under Verwaltung → Öffentliche Seiten after the build (the plan wishes it published)\n"
+    }
+  ],
+  "tools": [],
+  "covered_by_platform": [
+    {
+      "wish": "Workshops mit Titel, Datum, Ort und maximaler Teilnehmerzahl anlegen",
+      "feature": "record_form"
+    }
+  ],
+  "ownership": {},
+  "dashboard": {
+    "focus": [
+      "Je Workshop die Zahl der Anmeldungen und die freien Plätze (maximale Teilnehmerzahl minus Anmeldungen)",
+      "Pro Workshop ein Klick auf den QR-Code, der bildschirmfüllend in einem eigenen Browsertab mit Titel und Datum darüber öffnet",
+      "Kommende Workshops zuerst nach Datum"
+    ],
+    "hints": [
+      "Der QR-Code verweist auf die öffentliche Anmeldeseite genau dieses Workshops",
+      "Ausgebuchte Workshops deutlich markieren"
+    ],
+    "views": [
+      {
+        "route": "workshop-qr-code",
+        "label": {
+          "de": "QR-Code",
+          "en": "QR code"
+        },
+        "purpose": "Den QR-Code eines Workshops bildschirmfüllend zeigen, darüber Titel und Datum, damit Interessierte vor Ort ihn scannen und sich anmelden.",
+        "bare": true,
+        "live_seconds": 0,
+        "reads": [
+          {
+            "entity": "workshops",
+            "columns": [
+              "titel",
+              "datum"
+            ],
+            "filter": {
+              "mode": "all",
+              "conditions": []
+            }
+          }
+        ],
+        "contract": [
+          "Die Übersicht hat je Workshop einen Knopf „QR-Code zeigen“, der diese Ansicht in einem eigenen Browsertab mit dem gewählten Workshop öffnet.",
+          "Zeigt genau den Workshop, den der Knopf gewählt hat: Titel und Datum stehen oben, darunter der QR-Code bildschirmfüllend.",
+          "Der QR-Code führt zur öffentlichen Anmeldeseite genau dieses Workshops.",
+          "Ohne gewählten Workshop erscheint der Hinweis „Bitte in der Übersicht einen Workshop wählen“."
+        ],
+        "shows_marked": "",
+        "edits": [],
+        "compose": []
+      }
+    ],
+    "writes": [],
+    "wishes": []
+  }
+}

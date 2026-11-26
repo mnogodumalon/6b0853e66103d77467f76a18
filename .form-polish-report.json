@@ -1,0 +1,18 @@
+{
+  "entities": {
+    "Workshops": {
+      "placeholders_set": 4,
+      "defaults_keys": [
+        "datum"
+      ],
+      "computed_keys": [],
+      "reason": "Keine Formeln, da es sich um Stammdaten ohne Datumspaar oder Preisfelder handelt; das Datum startet mit heute."
+    },
+    "Anmeldungen": {
+      "placeholders_set": 5,
+      "defaults_keys": [],
+      "computed_keys": [],
+      "reason": "Keine Formeln, da die Anmeldung keine eigenen Zahlenfelder, Datumspaare oder Preise enthält und max_teilnehmer nur eine Kapazitätsgrenze ist."
+    }
+  }
+}

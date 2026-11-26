@@ -1,0 +1,26 @@
+{
+  "pages": {
+    "en": {
+      "Als Nächstes: {0} am {1} — {2} von {3} Plätzen belegt.": "Next up: {0} on {1} — {2} of {3} spots taken.",
+      "Ausgebucht": "Fully booked",
+      "Bearbeiten": "Edit",
+      "Ersten Workshop anlegen": "Create first workshop",
+      "Fragen an die Referentin": "Questions for the speaker",
+      "Freie Plätze": "Available spots",
+      "Keine Workshops in dieser Auswahl.": "No workshops in this selection.",
+      "Keine freien Plätze": "No spots available",
+      "Kommende Workshops": "Upcoming workshops",
+      "Lege deinen ersten Workshop an — danach bekommt er einen eigenen QR-Code für die Anmeldung.": "Create your first workshop — it will then get its own QR code for registration.",
+      "Noch kein Workshop geplant — leg den ersten an und zeig den QR-Code vor Ort.": "No workshop scheduled yet — create your first one and show the QR code on site.",
+      "Noch keine Fragen eingegangen.": "No questions received yet.",
+      "QR-Code zeigen": "Show QR code",
+      "Sobald sich jemand per QR-Code anmeldet, siehst du es hier.": "As soon as someone registers via QR code, you'll see it here.",
+      "Vergangene anzeigen": "Show past",
+      "Vergangene ausblenden": "Hide past",
+      "Workshop anlegen": "Create workshop",
+      "{0} von {1} Plätzen frei": "{0} of {1} spots available",
+      "{0} überbucht": "{0} overbooked"
+    }
+  },
+  "v": 1
+}

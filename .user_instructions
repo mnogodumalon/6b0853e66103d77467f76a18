@@ -1,0 +1,9 @@
+Ziel: Wir veranstalten Workshops und nehmen Anmeldungen direkt vor Ort entgegen.
+
+Ich lege Workshops mit Titel, Datum, Ort und maximaler Teilnehmerzahl an.
+
+Zu jedem Workshop gibt es einen eigenen QR-Code. Ein Klick beim Workshop öffnet diesen QR-Code bildschirmfüllend in einem eigenen Browsertab, darüber stehen Titel und Datum des Workshops.
+
+Interessierte scannen den QR-Code und melden sich ohne Anmeldung für genau diesen Workshop an: Vorname, Nachname, E-Mail-Adresse und eine optionale Frage an die Referentin.
+
+In der Übersicht sehe ich je Workshop die Zahl der Anmeldungen und die freien Plätze.

@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "pages": [
+    {
+      "slug": "workshop-anmelden",
+      "component": "WorkshopAnmelden",
+      "title": "Workshop-Anmeldung",
+      "link_param": {
+        "name": "workshop",
+        "entity": "workshops",
+        "label_field": "titel"
+      },
+      "door_per_record": true,
+      "endpoints": [
+        {
+          "entity": "workshops",
+          "op": "list",
+          "fields": [
+            "titel",
+            "datum",
+            "ort"
+          ],
+          "scope_description": "zeigt nur den Workshop des Links",
+          "max_records": 100
+        },
+        {
+          "entity": "anmeldungen",
+          "op": "create",
+          "fields": [
+            "workshop",
+            "vorname",
+            "nachname",
+            "email",
+            "frage"
+          ]
+        }
+      ]
+    }
+  ]
+}
